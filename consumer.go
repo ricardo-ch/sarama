@@ -580,6 +580,9 @@ func (child *partitionConsumer) parseResponse(response *FetchResponse) ([]*Consu
 	messages := []*ConsumerMessage{}
 	for _, records := range block.RecordsSet {
 		if control, err := records.isControl(); err != nil || control {
+			if err == nil {
+				child.offset = records.RecordBatch.FirstOffset + records.RecordBatch.Records[0].OffsetDelta + 1
+			}
 			continue
 		}
 
