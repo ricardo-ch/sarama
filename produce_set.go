@@ -61,7 +61,8 @@ func (ps *produceSet) add(msg *ProducerMessage) error {
 			batch := &RecordBatch{
 				FirstTimestamp:   timestamp,
 				Version:          2,
-				ProducerID:       -1, /* No producer id */
+				ProducerID:       ps.parent.conf.Producer.ProducerID,
+				ProducerEpoch:    ps.parent.conf.Producer.ProducerEpoch,
 				Codec:            ps.parent.conf.Producer.Compression,
 				CompressionLevel: ps.parent.conf.Producer.CompressionLevel,
 			}

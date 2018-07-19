@@ -111,6 +111,9 @@ type Config struct {
 		// setting for the JVM producer.
 		Partitioner PartitionerConstructor
 
+		ProducerID    int64
+		ProducerEpoch int16
+
 		// Return specifies what channels will be populated. If they are set to true,
 		// you must read from the respective channels to prevent deadlock. If,
 		// however, this config is used to create a `SyncProducer`, both must be set
@@ -298,6 +301,8 @@ func NewConfig() *Config {
 	c.Producer.Retry.Backoff = 100 * time.Millisecond
 	c.Producer.Return.Errors = true
 	c.Producer.CompressionLevel = CompressionLevelDefault
+	c.Producer.ProducerID = -1
+	c.Producer.ProducerEpoch = -1
 
 	c.Consumer.Fetch.Min = 1
 	c.Consumer.Fetch.Default = 1024 * 1024
