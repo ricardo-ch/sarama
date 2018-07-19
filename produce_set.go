@@ -111,8 +111,9 @@ func (ps *produceSet) add(msg *ProducerMessage) error {
 
 func (ps *produceSet) buildRequest() *ProduceRequest {
 	req := &ProduceRequest{
-		RequiredAcks: ps.parent.conf.Producer.RequiredAcks,
-		Timeout:      int32(ps.parent.conf.Producer.Timeout / time.Millisecond),
+		TransactionalID: ps.parent.conf.Producer.TransactionalID,
+		RequiredAcks:    ps.parent.conf.Producer.RequiredAcks,
+		Timeout:         int32(ps.parent.conf.Producer.Timeout / time.Millisecond),
 	}
 	if ps.parent.conf.Version.IsAtLeast(V0_10_0_0) {
 		req.Version = 2

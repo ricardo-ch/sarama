@@ -111,8 +111,9 @@ type Config struct {
 		// setting for the JVM producer.
 		Partitioner PartitionerConstructor
 
-		ProducerID    int64
-		ProducerEpoch int16
+		ProducerID      int64
+		ProducerEpoch   int16
+		TransactionalID *string
 
 		// Return specifies what channels will be populated. If they are set to true,
 		// you must read from the respective channels to prevent deadlock. If,
